@@ -1,0 +1,56 @@
+package cn.edu.zjut.app; 
+import org.springframework.context.ApplicationContext; 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.util.Map.Entry; 
+import cn.edu.zjut.bean.ItemOrder;
+import cn.edu.zjut.bean.ShoppingCart;
+import java.util.Properties;
+public class SpringEnvTest {
+	public static void main(String[] args) { 
+		ApplicationContext ctx = new ClassPathXmlApplicationContext( "applicationContext.xml"); 
+		ShoppingCart shoppingcart = (ShoppingCart) ctx.getBean("shoppingcart");
+
+		System.out.println("**********通过list集合取出数据*****");
+		for(ItemOrder e : shoppingcart.getItemsOrderedlist()){
+			System.out.println("书名:"+e.getItem().getTitle()+" 单价:"+e.getUnitCost()+" 数量:"+e.getNumItems()+" 总价:"+e.getTotalCost());
+		}
+
+		System.out.println("**********通过set集合取出数据*****");
+		for(ItemOrder e : shoppingcart.getItemsOrderedset()){			
+			System.out.println("书名:"+e.getItem().getTitle()+" 单价:"+e.getUnitCost()+" 数量:"+e.getNumItems()+" 总价:"+e.getTotalCost());
+		}
+		
+		System.out.println("**********通过map集合取出数据*****");
+		for(Entry<String,ItemOrder> entry1:shoppingcart.getItemsOrderedmap().entrySet()){			
+			System.out.println(entry1.getKey()+" 书名:"+entry1.getValue().getItem().getTitle()+" 单价:"+entry1.getValue().getUnitCost()+" 数量:"+entry1.getValue().getNumItems()+" 总价:"+entry1.getValue().getTotalCost());
+		}
+		
+	} 
+}
+
+
+
+if(exists (select *from sys.objects where name='gradesearch'))
+    drop proc gradesearch
+go
+create proc gradesearchgread(@id nvarchar(10))
+as
+    select Grade.Cname as 课程名,Teacher.Tname as 教师名,Grade.Grade as 成绩
+	from Student,Grade,Teacher
+where Student.Sid=Grade.Sid and Grade.Tid=Teacher.Tid and Student.Sid=@id
+
+insert into Grade values
+('C001','操作系统','朱老师','S001','90'),
+('C002','数据库设计','马老师','S001','88'),
+('C003','软件工程','江老师','S001','95'),
+('C001','操作系统','朱老师','S002','80'),
+('C001','操作系统','朱老师','S003','77')
+
+
+insert into Grade values
+('C001','朱老师','S001','90'),
+('C002','马老师','S001','88'),
+('C003','江老师','S001','95'),
+('C001','朱老师','S002','80'),
+('C001','朱老师','S003','77')
+
